@@ -12,6 +12,8 @@ const router = createBrowserRouter([
   {path: '/product/:id', element: <ProductDetail/>}
 ])
 
-export default App = () => {
+const App = () => {
   return <RouterProvider router={router}/>
 } 
+
+export default App;
