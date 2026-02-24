@@ -19,7 +19,15 @@ export const createProduct = async (req, res) => {
 // Get all Products
 export const getProducts = async (req, res) => {
   try {
-    const allProducts = await product.find().sort({ createdAt: -1 });
+    const { search, category } = req.query;
+    let filter = {};
+    if (search) {
+      filter.title = { $regex: search, $options: "i" };
+    }
+    if (category) {
+      filter.category = category;
+    }
+    const allProducts = await product.find(filter).sort({ createdAt: -1 });
     res.json({
       message: "All products ",
       allProducts,
@@ -38,7 +46,11 @@ export const updateProduct = async (req, res) => {
     const editProduct = await product.findByIdAndUpdate(
       req.params.id,
       req.body,
-      { new: true },
+      { 
+        returnDocument: "after" ,
+        runValidators: true  
+      }
+
     );
     res.json({
       message: "Product updated Successfully ",
@@ -73,7 +85,6 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-
 export const getSingleProduct = async (req, res) => {
   try {
     const singleProduct = await product.findById(req.params.id);
@@ -85,9 +96,8 @@ export const getSingleProduct = async (req, res) => {
     }
 
     res.status(200).json(singleProduct);
-
   } catch (error) {
-        console.log("Single Product Error:", error);  
+    console.log("Single Product Error:", error);
     res.status(500).json({
       message: "Server Error",
       error: error.message,

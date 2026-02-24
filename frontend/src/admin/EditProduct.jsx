@@ -3,8 +3,6 @@ import api from "../api/axios.js";
 import { useNavigate, useParams } from "react-router";
 
 const EditProduct = () => {
-
-
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -20,7 +18,10 @@ const EditProduct = () => {
   const loadProduct = async () => {
     const res = await api.get(`/products/${id}`);
 
-    setForm(res.data);
+    setForm((prev) => ({
+      ...prev,
+      ...res.data,
+    }));
   };
 
   useEffect(() => {
@@ -46,7 +47,7 @@ const EditProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.put(`/product/edit/${id}`, form);
+      await api.put(`/products/update/${id}`, form);
       alert("Product Updated Successfully");
       navigate("/admin/products");
     } catch (error) {
@@ -68,7 +69,7 @@ const EditProduct = () => {
                 <input
                   key={key}
                   name={key}
-                  value={form[key]}
+                  value={form[key] || ""}
                   placeholder={key}
                   onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-300"

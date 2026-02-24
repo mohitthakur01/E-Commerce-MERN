@@ -71,7 +71,7 @@ const Products = () => {
 
                   <td className="p-3 flex items-center justify-center gap-3">
                     <Link
-                      to={`/admin/products/edit/${product._id}`}
+                      to={`/admin/products/update/${product._id}`}
                       className="px-4 py-1 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 transition duration-200"
                     >
                       Edit
