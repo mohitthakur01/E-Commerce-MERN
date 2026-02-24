@@ -72,3 +72,25 @@ export const deleteProduct = async (req, res) => {
     });
   }
 };
+
+
+export const getSingleProduct = async (req, res) => {
+  try {
+    const singleProduct = await product.findById(req.params.id);
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found",
+      });
+    }
+
+    res.status(200).json(singleProduct);
+
+  } catch (error) {
+        console.log("Single Product Error:", error);  
+    res.status(500).json({
+      message: "Server Error",
+      error: error.message,
+    });
+  }
+};
