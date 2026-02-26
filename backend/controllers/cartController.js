@@ -102,16 +102,19 @@ export const updateQuantity = async (req, res) => {
 // Get cart by user ID
 export const getCart = async (req, res) => {
   try {
-    const { userId } = req.body;
+    const { userId } = req.params;
 
-    const cart = await Cart.findOne({ userId }).populate("items.productId");
+    const cart = await Cart.findOne({ userId })
+      .populate("items.productId");
 
     if (!cart) {
       return res.status(404).json({ message: "Cart not found" });
     }
 
     res.status(200).json(cart);
+
   } catch (error) {
-    res.status(500).json({ message: "Server Error", error });
+    console.error("GET CART ERROR:", error);
+    res.status(500).json({ message: error.message });
   }
 };

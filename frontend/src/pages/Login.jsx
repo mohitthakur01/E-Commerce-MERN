@@ -25,6 +25,7 @@ const Login = () => {
       
       // save token
       localStorage.setItem('token', res.data.token);
+      localStorage.setItem('userId', res.data.user.id)
 
       setMessage('Login Successfully. Home page is Loading...')
       // Redirect to homepage

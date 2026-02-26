@@ -20,6 +20,6 @@ router.post('/remove', removeFromCart)
 router.post('/update', updateQuantity)
 
 // Get user's Cart
-router.get('/:userID', getCart)
+router.get('/:userId', getCart)
 
 export default router; 
