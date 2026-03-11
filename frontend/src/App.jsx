@@ -10,9 +10,10 @@ import Navbar from "./components/Navbar";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import CheckoutAddress from "./pages/CheckoutAddress";
+import OrderSuccess from "./pages/OrderSuccess";
 
 function Layout() {
-  return(
+  return (
     <>
       <Navbar />
       <Outlet />
@@ -31,9 +32,10 @@ const router = createBrowserRouter([
       { path: "/admin/products/add", element: <AddProduct /> },
       { path: "/admin/products", element: <Products /> },
       { path: "/admin/products/update/:id", element: <EditProduct /> },
-      {path: "/cart" , element: <Cart/>},
-      {path:"/checkout-address", element:<CheckoutAddress/>},
-      {path:"/checkout", element:<Checkout/>},
+      { path: "/cart", element: <Cart /> },
+      { path: "/checkout-address", element: <CheckoutAddress /> },
+      { path: "/checkout", element: <Checkout /> },
+      { path: "/order-success/:id", element: <OrderSuccess /> },
     ],
   },
 ]);
